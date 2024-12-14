@@ -20,34 +20,32 @@
 <body>
   <h1>Detail Produk</h1>
   <div id="product-details"></div>
+  <script>
+    const productDetails = document.getElementById('product-details');
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    if (productId) {
+      db.collection('products').doc(productId).get().then(doc => {
+        if (doc.exists) {
+          const product = doc.data();
+          productDetails.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" style="width: 200px;">
+            <h2>${product.name}</h2>
+            <p>Harga: Rp ${product.price}</p>
+            <p>Stok: ${product.stock}</p>
+            <p>${product.description}</p>
+            <button onclick="buyProduct('${doc.id}')">Beli Sekarang</button>
+          `;
+        } else {
+          productDetails.innerHTML = '<p>Produk tidak ditemukan</p>';
+        }
+      });
+    } else {
+      productDetails.innerHTML = '<p>ID Produk tidak valid</p>';
+    }
+    function buyProduct(productId) {
+      alert(`Produk dengan ID ${productId} telah dibeli!`);
+    }
+  </script>
 </body>
-<script>
-  const productDetails = document.getElementById('product-details');
-  const urlParams = new URLSearchParams(window.location.search);
-  const productId = urlParams.get('id');
-
-  if (productId) {
-    db.collection('products').doc(productId).get().then(doc => {
-      if (doc.exists) {
-        const product = doc.data();
-        productDetails.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" style="width: 200px;">
-          <h2>${product.name}</h2>
-          <p>Harga: Rp ${product.price}</p>
-          <p>Stok: ${product.stock}</p>
-          <button onclick="buyProduct('${doc.id}')">Beli Sekarang</button>
-        `;
-      } else {
-        productDetails.innerHTML = '<p>Produk tidak ditemukan</p>';
-      }
-    });
-  } else {
-    productDetails.innerHTML = '<p>ID Produk tidak valid</p>';
-  }
-
-  function buyProduct(productId) {
-    alert(`Produk dengan ID ${productId} telah dibeli!`);
-    // Tambahkan logika transaksi di sini.
-  }
-</script>
 </html>
