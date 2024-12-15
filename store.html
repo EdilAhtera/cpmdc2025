@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Store</title>
-  <!-- Gunakan type="module" agar import dan export bisa bekerja -->
-  <script type="module" src="js/store.js"></script> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Page</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
 
-  <!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
-
-<!-- Firebase SDK lainnya (auth, firestore, dll.) jika perlu -->
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-
-<!-- Custom JS -->
-<script src="js/store.js"></script>
-
+    <!-- Custom JS -->
+    <script src="js/firebase.js"></script>
+    <script src="js/store.js"></script>
 </head>
 <body>
-  <h1>Produk Kami</h1>
-  <div id="product-list"></div>
+
+    <h1>Store Page</h1>
+
+    <div id="product-list">
+        <!-- Produk akan dimuat di sini -->
+    </div>
+
 </body>
 </html>
