@@ -1,8 +1,3 @@
-// firebase.js
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
-import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js';
-
 // Konfigurasi Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyDxMxtcxKYblIF9R1Izj6_OF0Zx-NU7zxY",
@@ -15,25 +10,4 @@ const firebaseConfig = {
 };
 
 // Inisialisasi Firebase
-const app = initializeApp(firebaseConfig);
-
-// Inisialisasi Firestore
-const db = getFirestore(app);
-
-// Fungsi untuk memuat produk dari Firestore dan menampilkannya di halaman
-export async function loadProducts() {
-  const querySnapshot = await getDocs(collection(db, "produk"));
-  const productList = document.getElementById('product-list');
-  querySnapshot.forEach((doc) => {
-    const product = doc.data();
-    const productDiv = document.createElement('div');
-    productDiv.classList.add('product-card');
-    productDiv.innerHTML = `
-      <h3>${product.nama}</h3>
-      <p>Harga: Rp ${product.harga}</p>
-      <p>Stok: ${product.sisa}</p>
-      <a href="product.html?id=${doc.id}">Lihat Detail</a>
-    `;
-    productList.appendChild(productDiv);
-  });
-}
+firebase.initializeApp(firebaseConfig);
