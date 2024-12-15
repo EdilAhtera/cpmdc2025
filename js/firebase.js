@@ -1,11 +1,11 @@
 // firebase.js
 const firebaseConfig = {
-    apiKey: "API_KEY",
-    authDomain: "AUTH_DOMAIN",
-    projectId: "PROJECT_ID",
-    storageBucket: "STORAGE_BUCKET",
-    messagingSenderId: "MESSAGING_SENDER_ID",
-    appId: "APP_ID"
+    apiKey: "AIzaSyDxMxtcxKYblIF9R1Izj6_OF0Zx-NU7zxY",
+    authDomain: "tokoonline-561d8.firebaseapp.com",
+    projectId: "tokoonline-561d8",
+    storageBucket: "tokoonline-561d8.firebasestorage.app",
+    messagingSenderId: "799667418330",
+    appId: "1:799667418330:web:44741de8e8db5596cde1e3"
 };
 
 const app = firebase.initializeApp(firebaseConfig);
