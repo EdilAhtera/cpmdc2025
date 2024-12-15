@@ -1,27 +1,35 @@
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
 <!-- dashboard.html -->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Admin Dashboard</h1>
-    <form id="add-product-form">
-        <input type="text" id="nama" placeholder="Nama Produk">
-        <input type="number" id="harga" placeholder="Harga Produk">
-        <input type="number" id="sisa" placeholder="Stok Produk">
-        <textarea id="deskripsi" placeholder="Deskripsi Produk"></textarea>
-        <input type="text" id="gambar" placeholder="URL Gambar">
-        <input type="text" id="kategori" placeholder="Kategori Produk">
-        <button type="submit">Tambah Produk</button>
-    </form>
-    
-    <h2>Daftar Produk</h2>
-    <ul id="product-list"></ul>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+    <!-- Custom JS -->
     <script src="js/firebase.js"></script>
     <script src="js/dashboard.js"></script>
+</head>
+<body>
+
+    <h1>Admin Dashboard</h1>
+
+    <form id="product-form">
+        <input type="text" id="name" placeholder="Nama Produk" required />
+        <input type="text" id="price" placeholder="Harga Produk" required />
+        <textarea id="description" placeholder="Deskripsi Produk" required></textarea>
+        <input type="text" id="image" placeholder="URL Gambar Produk" required />
+        <button type="submit">Tambah Produk</button>
+    </form>
+
+    <div id="product-list">
+        <!-- Produk yang ada di Firebase akan ditampilkan di sini -->
+    </div>
+
 </body>
 </html>
