@@ -1,3 +1,27 @@
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+<!-- dashboard.html -->
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <form id="add-product-form">
+        <input type="text" id="nama" placeholder="Nama Produk">
+        <input type="number" id="harga" placeholder="Harga Produk">
+        <input type="number" id="sisa" placeholder="Stok Produk">
+        <textarea id="deskripsi" placeholder="Deskripsi Produk"></textarea>
+        <input type="text" id="gambar" placeholder="URL Gambar">
+        <input type="text" id="kategori" placeholder="Kategori Produk">
+        <button type="submit">Tambah Produk</button>
+    </form>
+    
+    <h2>Daftar Produk</h2>
+    <ul id="product-list"></ul>
+    
+    <script src="js/firebase.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
