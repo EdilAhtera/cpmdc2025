@@ -1,12 +1,18 @@
 // store.js
 const productList = document.getElementById('product-list');
 
-// Ambil data produk dari Firestore
+// Memastikan Firestore sudah terhubung
 firebase.firestore().collection('produk').get()
     .then(snapshot => {
+        if (snapshot.empty) {
+            console.log('Tidak ada produk dalam database');
+            return;
+        }
+
         snapshot.forEach(doc => {
             const product = doc.data();
             const productDiv = document.createElement('div');
+            productDiv.classList.add('product-card');
             productDiv.innerHTML = `
                 <h3>${product.nama}</h3>
                 <p>Harga: Rp ${product.harga}</p>
