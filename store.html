@@ -1,54 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Store Produk</title>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBxcHdB9EgzCtiG0vGT3tmq7sBlONAyFEE",
-      authDomain: "cpmdcstr.firebaseapp.com",
-      projectId: "cpmdcstr",
-      storageBucket: "cpmdcstr.firebasestorage.app",
-      messagingSenderId: "976614781564",
-      appId: "1:976614781564:web:24b5e4e901869c31ddcff9"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  </script>
-  <style>
-    .product-card { border: 1px solid #ddd; padding: 16px; margin: 16px; width: 200px; text-align: center; }
-    .product-card img { max-width: 100%; height: auto; }
-    .product-card button { background-color: #3396bb; color: white; padding: 8px 16px; border: none; cursor: pointer; }
-    .product-card button:hover { background-color: #287693; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Store Produk</h1>
-  <div id="product-list" style="display: flex; flex-wrap: wrap;"></div>
+  <h1>Store</h1>
+  <div id="products"></div>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+  <script src="app.js"></script>
   <script>
-    const productList = document.getElementById('product-list');
-    function fetchStoreProducts() {
-      productList.innerHTML = '';
-      db.collection('products').get().then(snapshot => {
-        snapshot.docs.forEach(doc => {
-          const product = doc.data();
-          const productCard = `
-            <div class="product-card">
-              <img src="${product.image}" alt="${product.name}">
-              <h3>${product.name}</h3>
-              <p>Rp ${product.price}</p>
-              <button onclick="viewProduct('${doc.id}')">Beli</button>
-            </div>
-          `;
-          productList.innerHTML += productCard;
-        });
-      });
-    }
-    fetchStoreProducts();
-    function viewProduct(productId) {
-      window.location.href = `product.html?id=${productId}`;
-    }
+    // Fetch products from Firebase
+    const db = firebase.database();
+    db.ref("products").on("value", (snapshot) => {
+      const data = snapshot.val();
+      const productDiv = document.getElementById("products");
+      productDiv.innerHTML = "";
+      for (let id in data) {
+        const product = data[id];
+        productDiv.innerHTML += `
+          <div>
+            <h2>${product.name}</h2>
+            <p>Harga: Rp${product.price}</p>
+            <p>Stok: ${product.stock}</p>
+            <img src="${product.image}" alt="${product.name}" style="width:100px;">
+            <button onclick="window.location.href='product.html?id=${id}'">Lihat Detail</button>
+          </div>
+        `;
+      }
+    });
   </script>
 </body>
 </html>
