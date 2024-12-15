@@ -1,51 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detail Produk</title>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBxcHdB9EgzCtiG0vGT3tmq7sBlONAyFEE",
-      authDomain: "cpmdcstr.firebaseapp.com",
-      projectId: "cpmdcstr",
-      storageBucket: "cpmdcstr.firebasestorage.app",
-      messagingSenderId: "976614781564",
-      appId: "1:976614781564:web:24b5e4e901869c31ddcff9"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  </script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Detail Produk</h1>
-  <div id="product-details"></div>
+  <div id="productDetail"></div>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+  <script src="app.js"></script>
   <script>
-    const productDetails = document.getElementById('product-details');
+    const db = firebase.database();
     const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
-    if (productId) {
-      db.collection('products').doc(productId).get().then(doc => {
-        if (doc.exists) {
-          const product = doc.data();
-          productDetails.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" style="width: 200px;">
-            <h2>${product.name}</h2>
-            <p>Harga: Rp ${product.price}</p>
-            <p>Stok: ${product.stock}</p>
-            <p>${product.description}</p>
-            <button onclick="buyProduct('${doc.id}')">Beli Sekarang</button>
-          `;
-        } else {
-          productDetails.innerHTML = '<p>Produk tidak ditemukan</p>';
-        }
-      });
-    } else {
-      productDetails.innerHTML = '<p>ID Produk tidak valid</p>';
-    }
-    function buyProduct(productId) {
-      alert(`Produk dengan ID ${productId} telah dibeli!`);
-    }
+    const id = urlParams.get("id");
+
+    db.ref("products/" + id).on("value", (snapshot) => {
+      const product = snapshot.val();
+      const productDetail = document.getElementById("productDetail");
+      productDetail.innerHTML = `
+        <h2>${product.name}</h2>
+        <p>Harga: Rp${product.price}</p>
+        <p>Stok: ${product.stock}</p>
+        <p>${product.description}</p>
+        <img src="${product.image}" alt="${product.name}" style="width:300px;">
+      `;
+    });
   </script>
 </body>
 </html>
