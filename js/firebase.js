@@ -20,9 +20,10 @@ const app = initializeApp(firebaseConfig);
 // Inisialisasi Firestore
 const db = getFirestore(app);
 
-// Menampilkan produk di halaman store
-async function loadProducts() {
+// Fungsi untuk memuat produk dari Firestore dan menampilkannya di halaman
+export async function loadProducts() {
   const querySnapshot = await getDocs(collection(db, "produk"));
+  const productList = document.getElementById('product-list');
   querySnapshot.forEach((doc) => {
     const product = doc.data();
     const productDiv = document.createElement('div');
@@ -33,9 +34,6 @@ async function loadProducts() {
       <p>Stok: ${product.sisa}</p>
       <a href="product.html?id=${doc.id}">Lihat Detail</a>
     `;
-    document.getElementById('product-list').appendChild(productDiv);
+    productList.appendChild(productDiv);
   });
 }
-
-// Panggil fungsi untuk memuat produk
-loadProducts();
