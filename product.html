@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- product.html -->
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Produk</title>
-  <link rel="stylesheet" href="style.css">
+    <title>Detail Produk</title>
 </head>
 <body>
-  <h1>Detail Produk</h1>
-  <div id="productDetail"></div>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
-  <script src="app.js"></script>
-  <script>
-    const db = firebase.database();
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
+    <div id="product-detail"></div>
 
-    db.ref("products/" + id).on("value", (snapshot) => {
-      const product = snapshot.val();
-      const productDetail = document.getElementById("productDetail");
-      productDetail.innerHTML = `
-        <h2>${product.name}</h2>
-        <p>Harga: Rp${product.price}</p>
-        <p>Stok: ${product.stock}</p>
-        <p>${product.description}</p>
-        <img src="${product.image}" alt="${product.name}" style="width:300px;">
-      `;
-    });
-  </script>
+    <script src="js/firebase.js"></script>
+    <script src="js/product.js"></script>
 </body>
 </html>
