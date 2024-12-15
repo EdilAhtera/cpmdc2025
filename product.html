@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Produk</title>
-  <script type="module" src="js/product.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/firebase.js"></script>
+    <script src="js/product.js"></script>
 </head>
 <body>
-  <h1>Detail Produk</h1>
-  <div id="product-detail"></div>
+
+    <h1>Product Detail</h1>
+
+    <div id="product-detail">
+        <!-- Detail produk akan dimuat di sini -->
+    </div>
+
 </body>
 </html>
