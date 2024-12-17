@@ -24,4 +24,10 @@ window.onload = function() {
     }
 };
 
-// Fung
+// Fungsi untuk menghapus produk dari keranjang
+function removeFromCart(productId) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const updatedCart = cart.filter(id => id !== productId);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    window.location.reload();
+}
