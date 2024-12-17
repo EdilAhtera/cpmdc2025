@@ -1,23 +1,66 @@
+<!-- dashboard.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <title>Admin Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/assets/js/firebase-config.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Admin Dashboard</h1>
-    <form id="product-form" class="space-y-4">
-      <input type="text" id="name" placeholder="Nama Produk" class="input" required>
-      <input type="number" id="price" placeholder="Harga Produk" class="input" required>
-      <textarea id="description" placeholder="Deskripsi" class="input"></textarea>
-      <button class="btn bg-blue-500 text-white">Simpan</button>
-    </form>
-    <div id="product-list" class="mt-4">
-      <!-- Daftar produk untuk edit/hapus -->
-    </div>
-  </div>
-  <script src="/assets/js/dashboard.js"></script>
+    <header class="p-4 bg-blue-600 text-white text-center">
+        <h1>Dashboard Admin</h1>
+    </header>
+
+    <main class="container mx-auto p-4">
+        <!-- Form Tambah/Edit Produk -->
+        <div class="mb-4">
+            <h2 class="font-bold text-xl">Tambah/Edit Produk</h2>
+            <form id="product-form">
+                <div class="mb-4">
+                    <label for="name" class="block">Nama Produk</label>
+                    <input type="text" id="name" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="price" class="block">Harga</label>
+                    <input type="number" id="price" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="stock" class="block">Stok</label>
+                    <input type="number" id="stock" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="category" class="block">Kategori</label>
+                    <input type="text" id="category" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="description" class="block">Deskripsi</label>
+                    <textarea id="description" class="w-full p-2 border border-gray-300 rounded" required></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="images" class="block">Link Gambar (Maks 3)</label>
+                    <input type="url" id="images" class="w-full p-2 border border-gray-300 rounded" placeholder="Link gambar produk">
+                </div>
+                <button type="submit" class="bg-blue-500 text-white p-2 rounded">Simpan Produk</button>
+            </form>
+        </div>
+
+        <!-- Daftar Produk -->
+        <div id="product-list">
+            <h2 class="font-bold text-xl">Daftar Produk</h2>
+            <div id="products" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mt-4">
+                <!-- Produk akan ditampilkan di sini -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-4 bg-blue-600 text-white text-center">
+        <p>&copy; 2024 Ecommerce</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 </html>
