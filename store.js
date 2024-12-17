@@ -1,29 +1,25 @@
-import { db } from "./firebase-config.js";
-import { ref, get } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+import { getDatabase, ref, onValue } from "firebase/database";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const productGrid = document.getElementById("product-grid");
-
-  const fetchProducts = async () => {
-    const snapshot = await get(ref(db, "products"));
-    const products = snapshot.val();
-
-    if (products) {
-      Object.entries(products).forEach(([key, product]) => {
-        const card = `
-          <div class="bg-white shadow-md rounded p-4">
-            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded mb-2">
-            <h2 class="text-lg font-bold">${product.name}</h2>
-            <p class="text-sm text-gray-600">Rp${product.price}</p>
-            <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded" onclick="location.href='product.html?id=${key}'">View Product</button>
-          </div>
-        `;
-        productGrid.innerHTML += card;
-      });
-    } else {
-      productGrid.innerHTML = "<p>No products available.</p>";
-    }
-  };
-
-  fetchProducts();
+// Ambil data produk
+const db = getDatabase();
+const productRef = ref(db, 'products');
+onValue(productRef, (snapshot) => {
+  const products = snapshot.val();
+  renderProducts(products);
 });
+
+function renderProducts(products) {
+  const productList = document.getElementById("product-list");
+  productList.innerHTML = "";
+  for (let id in products) {
+    const product = products[id];
+    productList.innerHTML += `
+      <div class="card border rounded-lg p-4 w-full sm:w-1/3 lg:w-1/6">
+        <img src="${product.images[0]}" alt="${product.name}" class="w-full h-40 object-cover">
+        <h2 class="text-lg font-bold">${product.name}</h2>
+        <p class="text-sm">Harga: Rp${product.price}</p>
+        <button class="btn bg-blue-500 text-white mt-2" onclick="addToCart('${id}')">Masukkan ke Keranjang</button>
+        <a href="/detail.html?product=${id}" class="btn bg-gray-500 text-white mt-2">Detail</a>
+      </div>`;
+  }
+}
