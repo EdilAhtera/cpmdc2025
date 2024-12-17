@@ -1,0 +1,9 @@
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get("product");
+
+const db = getDatabase();
+const productRef = ref(db, `products/${productId}`);
+onValue(productRef, (snapshot) => {
+  const product = snapshot.val();
+  // Render data produk ke halaman
+});
