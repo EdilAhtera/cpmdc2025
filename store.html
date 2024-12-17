@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Store</title>
-  <script type="module" src="store.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/assets/js/firebase-config.js"></script>
 </head>
-<body class="bg-gray-100">
-  <div class="container mx-auto py-8">
-    <h1 class="text-2xl font-bold mb-4">Store</h1>
-    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+<body>
+  <div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Daftar Produk</h1>
+    <div id="product-list" class="flex flex-wrap justify-between gap-4">
+      <!-- Produk akan di-render di sini -->
+    </div>
   </div>
+  <script src="/assets/js/store.js"></script>
 </body>
 </html>
